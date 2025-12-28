@@ -32,4 +32,11 @@ Before this pipeline, the bank sent transaction events only to the internal EAZY
 
 ## Implementation Process
 
-Step-by-step build and deployment notes are in [process.md](process.md).
+1) Design architecture: diagram API Gateway, Lambda, DynamoDB, SES, EventBridge, CloudWatch, and S3 for artifacts.
+2) Configure access: create IAM roles/permissions and store secrets in Secrets Manager.
+3) Set up data and storage: model DynamoDB tables for users/transactions; create S3 bucket for Lambda artifacts.
+4) Build business logic: implement Lambda functions for ingest, processing, and notification dispatch; wire API Gateway endpoints.
+5) Orchestrate events: add EventBridge rules that trigger Lambda from bank transaction events.
+6) Notify users: configure SES (domain/email verification) for outbound mail.
+7) Observe and protect: enable CloudWatch logs/metrics/alarms for Lambda and API Gateway.
+8) Test and scale: run functional/integration tests and load scenarios; deploy via IaC (e.g., CloudFormation or terraform) and keep maintenance plans in place.
